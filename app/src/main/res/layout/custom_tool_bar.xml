@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_custom_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:background="#232323"
+    android:orientation="horizontal">
+
+    <ImageButton
+        android:id="@+id/btn_left"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:background="#232323"
+        android:contentDescription="@string/app_name"
+        android:scaleType="center"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        app:srcCompat="@drawable/ic_baseline_arrow_back_ios_new_24"
+        app:tint="#76ead7" />
+
+    <TextView
+        android:id="@+id/text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="APP"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#76ead7"
+        android:textSize="30sp" />
+
+    <ImageButton
+        android:id="@+id/btn_first_right"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="0.4"
+
+        android:backgroundTint="#232323"
+        android:contentDescription="TODO"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        app:srcCompat="@drawable/ic_baseline_mic_24"
+        app:tint="#76ead7" />
+
+    <ImageButton
+        android:id="@+id/btn_second_right"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="0.4"
+        android:backgroundTint="#232323"
+        android:contentDescription="TODO"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        app:srcCompat="@drawable/ic_baseline_menu_24"
+        app:tint="#76ead7" />
+</LinearLayout>

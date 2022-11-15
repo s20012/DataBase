@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">DatabaseTest</string>
+    <string name="delete">削除</string>
+    <string name="back">戻る</string>
+    <string name="title">タイトル</string>
+    <string name="text">本文</string>
+    <string name="save">編集</string>
+    <string name="translation">翻訳</string>
 </resources>

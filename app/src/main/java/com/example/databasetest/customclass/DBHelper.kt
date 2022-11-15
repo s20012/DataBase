@@ -1,4 +1,4 @@
-package com.example.databasetest
+package com.example.databasetest.customclass
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -11,7 +11,7 @@ class DBHelper(context: Context?): SQLiteOpenHelper(context, DBNAME, null, versi
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-        db?.execSQL("create table memos (id integer primary key, title text, content text)")
+        db?.execSQL("create table memos (id integer primary key, title text, content text, day text)")
         }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
