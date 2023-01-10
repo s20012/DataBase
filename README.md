@@ -10,3 +10,4 @@
 ・RecognizerIntent</br>
 ・百度翻译API ([APIキー](https://github.com/s20012/DataBase/blob/master/app/src/main/java/com/example/databasetest/EditActivity.kt)は自分のを使ってね)<br>
 # 4.使用方法
+</br>
