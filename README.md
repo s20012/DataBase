@@ -7,5 +7,6 @@
 # 3.使用環境
 ・Android Studio (使用言語はKotlin)</br>
 ・SQLite3</br>
-・百度翻译API<br>
-# 4.使い方
+・RecognizerIntent</br>
+・百度翻译API (APIキーは自分のを使ってね)<br>
+# 4.使用方法
