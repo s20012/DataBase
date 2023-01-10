@@ -10,15 +10,17 @@
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_ios_new_24.xml" value="0.343" />
         <entry key="app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.1725" />
         <entry key="app/src/main/res/drawable/ic_baseline_mic_24.xml" value="0.1725" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.33559782608695654" />
-        <entry key="app/src/main/res/layout/activity_memo.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.34739583333333335" />
+        <entry key="app/src/main/res/layout/activity_memo.xml" value="0.34739583333333335" />
         <entry key="app/src/main/res/layout/activity_save.xml" value="0.25833333333333336" />
         <entry key="app/src/main/res/layout/context_menu.xml" value="0.1" />
         <entry key="app/src/main/res/layout/custom_dialog.xml" value="0.12685185185185185" />
-        <entry key="app/src/main/res/layout/custom_tool_bar.xml" value="0.33177083333333335" />
+        <entry key="app/src/main/res/layout/custom_tool_bar.xml" value="0.2753623188405797" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.2028985507246377" />
         <entry key="app/src/main/res/layout/my_dialog.xml" value="0.25" />
         <entry key="app/src/main/res/menu/context_menu.xml" value="0.1962962962962963" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.155" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1815" />
       </map>
     </option>
   </component>

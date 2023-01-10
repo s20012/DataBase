@@ -17,10 +17,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.databasetest.databinding.ActivitySaveBinding
 import com.example.databasetest.customclass.DBHelper
 import com.example.databasetest.customclass.ToolBarCustomView
 import com.example.databasetest.customclass.ToolBarCustomViewDelegate
-import com.example.databasetest.databinding.ActivitySaveBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -42,7 +42,7 @@ class SaveActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
         setContentView(binding.root)
 
         supportActionBar?.hide()
-        
+
 
         val granted = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
         if (granted != PackageManager.PERMISSION_GRANTED) {
@@ -50,6 +50,7 @@ class SaveActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
         }
 
         setCustomToolBar()
+
 
         val helper = DBHelper(this)
         val memoId: Long = intent.getLongExtra("id",0)
@@ -83,7 +84,8 @@ class SaveActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
             }
             override fun onEndOfSpeech() { }
             override fun onError(error: Int) {
-                Toast.makeText(applicationContext, "エラー", Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, "もう一度お願いします", Toast.LENGTH_SHORT).show()
+                dialog?.dismiss()
                 onResult(binding.textContent.text.toString())
             }
             override fun onResults(results: Bundle) {
@@ -97,8 +99,8 @@ class SaveActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
         val toolBarCustomView = ToolBarCustomView(this)
         toolBarCustomView.delegate = this
 
-        val title = "アプリ"
-        toolBarCustomView.configure(title, false, false, R.drawable.ic_baseline_save_alt_24)
+        val title = "Speak Record"
+        toolBarCustomView.configure(title, false, R.drawable.ic_baseline_mic_24, R.drawable.ic_baseline_save_alt_24)
 
         // カスタムツールバーを挿入するコンテナ(入れ物)を指定
         val layout: LinearLayout = binding.containerForSecondToolbar
@@ -121,7 +123,6 @@ class SaveActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(applicationContext)
         speechRecognizer?.setRecognitionListener(createRecognitionListenerStringStream {  editText.setText(it) })
         speechRecognizer?.startListening(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH))
-        if(dialog == null) {
             dialog = AlertDialog.Builder(this)
                 .setTitle("入力中...")
                 .setView(editText)
@@ -129,16 +130,13 @@ class SaveActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
                     text = editText.text.toString()
                     binding.textContent.setText(text)
                     dialog.dismiss()
-                    speechRecognizer?.stopListening()
                 }
                 .setNegativeButton("キャンセル") { dialog, _ ->
-                    speechRecognizer?.stopListening()
-                    speechRecognizer?.cancel()
                     dialog.dismiss()
                 }
                 .create()
-        }
         dialog?.show()
+
     }
 
 

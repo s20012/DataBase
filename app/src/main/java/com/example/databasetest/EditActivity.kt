@@ -5,7 +5,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import android.widget.Spinner
@@ -19,15 +19,17 @@ import com.example.databasetest.util.MD5Util
 import com.example.databasetest.util.OkHttpUtil
 import org.json.JSONObject
 
-
 @SuppressLint("SimpleDateFormat")
 class EditActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
     private lateinit var binding: ActivityMemoBinding
+    private var memoId: Long = 0
+
+    private var helper = DBHelper(this)
 
     companion object{
         private const val TABLE_NAME="memos"
         private const val appId = "20180822000197406"
-        private const val pwdKey = "Hm8wS6ABB43f3BXy1Liq"
+        private const val pwdKey = "【自分のAPIキー】"
         private const val baiDuTranslateUrl = "https://fanyi-api.baidu.com/api/trans/vip/translate"
         private const val salt = 1435660288
     }
@@ -49,12 +51,9 @@ class EditActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
         binding = ActivityMemoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // デフォルトのアクションバーを非表示にする
         supportActionBar?.hide()
 
-        val helper = DBHelper(this)
-
-        val memoId: Long = intent.getLongExtra("id",0)
+        memoId = intent.getLongExtra("id", 0)
         if (memoId != 0L) {
             helper.readableDatabase.use {
                     db -> db.query(TABLE_NAME, arrayOf("id", "title", "content"), "id = ?", arrayOf(memoId.toString()), null, null, null, "1")
@@ -67,36 +66,24 @@ class EditActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
                 }
             }
         }
-
-        //初始化控件
         clipboardmanager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        //初始化下拉选择
+
         initSpiner(binding.from, 0)
         initSpiner(binding.to, 1)
-        //给翻译添加点击事件
-        binding.translate.setOnClickListener { //获取翻译语言
+
+        binding.translate.setOnClickListener {
             val from = map[binding.from.selectedItem.toString()].toString()
-            //获取要转换的语言
+
             val to = map[binding.to.selectedItem.toString()].toString()
-            //调用api得到结果
+
             doQuery(from, binding.textContent.text.toString(), to)
         }
 
+
+        if(!binding.textContent.text.toString().equals("")) binding.lotteAnimation.visibility = View.INVISIBLE
+
         setCustomToolBar()
 
-        binding.saveButton.setOnClickListener{
-            val intent = Intent(this, SaveActivity::class.java)
-            intent.putExtra("id", memoId)
-            startActivity(intent)
-        }
-        binding.deleteButton.setOnClickListener {
-            helper.writableDatabase.use {
-                    db ->
-                db.delete(TABLE_NAME, "id = ?", arrayOf(memoId.toString()))
-                Toast.makeText(this, "削除しました", Toast.LENGTH_SHORT).show()
-            }
-            finish()
-        }
     }
 
     override fun onResume() {
@@ -117,10 +104,6 @@ class EditActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
     private fun initSpiner(sp: Spinner, select: Int) {
         val starAdapter: ArrayAdapter<String> =
             ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, array)
-        //设置数组适配器的布局样式
-//        starAdapter.setDropDownViewResource(R.layout.item_dropdown);
-        //从布局文件中获取名叫sp_dialog的下拉框
-        //设置下拉框的标题，不设置就没有难看的标题了
         sp.prompt = "Chinese"
         //设置下拉框的数组适配器
         sp.adapter = starAdapter
@@ -177,8 +160,8 @@ class EditActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
         val toolBarCustomView = ToolBarCustomView(this)
         toolBarCustomView.delegate = this
 
-        val title = "アプリ"
-        toolBarCustomView.configure(title, false, true, R.drawable.ic_baseline_menu_24)
+        val title = "Speak Record"
+        toolBarCustomView.configure(title, false, R.drawable.ic_baseline_edit_24,R.drawable.ic_baseline_delete_24)
 
         // カスタムツールバーを挿入するコンテナ(入れ物)を指定
         val layout: LinearLayout = binding.containerForMainToolbar
@@ -197,11 +180,20 @@ class EditActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
     }
 
     override fun onClickedFirstRightButton() {
-        TODO("Not yet implemented")
+
+        val intent = Intent(this, SaveActivity::class.java)
+        intent.putExtra("id", memoId)
+        startActivity(intent)
     }
 
 
     override fun onClickedSecondRightButton() {
+        helper.writableDatabase.use {
+                db ->
+            db.delete(TABLE_NAME, "id = ?", arrayOf(memoId.toString()))
+            Toast.makeText(this, "削除しました", Toast.LENGTH_SHORT).show()
+        }
+        finish()
     }
 
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DatabaseTest</string>
+    <string name="app_name">SpeakRecord</string>
     <string name="delete">削除</string>
     <string name="back">戻る</string>
     <string name="title">タイトル</string>

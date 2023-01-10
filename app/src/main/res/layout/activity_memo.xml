@@ -7,6 +7,72 @@
     android:layout_height="match_parent"
     tools:context=".EditActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:minHeight="?attr/actionBarSize"
+        app:contentInsetStart="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/translate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/from"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:dropDownVerticalOffset="45dp"
+                android:minWidth="100dp"
+                android:spinnerMode="dropdown"
+                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/to"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:dropDownVerticalOffset="45dp"
+                android:minWidth="100dp"
+                android:spinnerMode="dropdown"
+                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/translate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="#232323"
+        android:text="@string/translation"
+        android:textAllCaps="false"
+        android:textColor="#20CDCE"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lotte_animation"
+        android:layout_width="0dp"
+        android:layout_height="210dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.53"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/not_found"
+        tools:ignore="MissingConstraints" />
+
     <LinearLayout
         android:id="@+id/container_for_main_toolbar"
         android:layout_width="match_parent"
@@ -18,15 +84,15 @@
         tools:ignore="InvalidId" />
 
     <LinearLayout
+        android:id="@+id/memolayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/container_for_main_toolbar"
-        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints">
 
         <TextView
@@ -62,66 +128,6 @@
             android:textSize="20sp"
             tools:ignore="SpeakableTextPresentCheck" />
 
-        <Button
-            android:id="@+id/save_button"
-            android:layout_width="79dp"
-            android:layout_height="41dp"
-            android:text="@string/save"
-            tools:ignore="TouchTargetSizeCheck" />
-
-        <Button
-            android:id="@+id/delete_button"
-            android:layout_width="79dp"
-            android:layout_height="41dp"
-            android:text="@string/delete"
-            tools:ignore="TouchTargetSizeCheck" />
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#eeeeee"
-            android:minHeight="?attr/actionBarSize"
-            app:contentInsetStart="0dp"
-            app:titleTextColor="@android:color/white">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/from"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:dropDownVerticalOffset="45dp"
-                    android:minWidth="100dp"
-                    android:spinnerMode="dropdown"
-                    tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
-
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/to"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:dropDownVerticalOffset="45dp"
-                    android:minWidth="100dp"
-                    android:spinnerMode="dropdown"
-                    tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
-            </LinearLayout>
-        </androidx.appcompat.widget.Toolbar>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/translate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:text="@string/translation"
-            android:textAllCaps="false"
-            android:textColor="#607D8B"
-            android:textStyle="bold"
-            tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
     </LinearLayout>
 
 

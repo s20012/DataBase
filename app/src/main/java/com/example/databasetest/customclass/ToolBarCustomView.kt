@@ -39,7 +39,7 @@ class ToolBarCustomView : LinearLayout {
     }
 
     // ツールバーに表示する文字や、ボタンの表示/非表示の切り替えを設定する
-    fun configure(titleText: String, isHideLeftButton: Boolean, isHideFirstRightButton: Boolean, isHideSecondRightButton: Int) {
+    fun configure(titleText: String, isHideLeftButton: Boolean, isHideFirstRightButton: Int?, isHideSecondRightButton: Int) {
         //　カスタムツールバーのImageButtonとTextViewを取得する
         val titleTextView: TextView = findViewById(R.id.text_title)
         val leftButton: ImageButton = findViewById(R.id.btn_left)
@@ -51,7 +51,11 @@ class ToolBarCustomView : LinearLayout {
         // ImageViewの表示/非表示を切り替える
         titleTextView.text = titleText
         leftButton.visibility = if (isHideLeftButton) View.INVISIBLE else View.VISIBLE
-        rightFirstButton.visibility = if (isHideFirstRightButton) View.INVISIBLE else View.VISIBLE
+        if (isHideFirstRightButton != null) {
+            rightFirstButton.setImageResource(isHideFirstRightButton)
+        } else {
+            rightFirstButton.visibility = View.INVISIBLE
+        }
         rightSecondButton.setImageResource(isHideSecondRightButton)
 
         // ボタンがクリックされたときのリスナーを設定

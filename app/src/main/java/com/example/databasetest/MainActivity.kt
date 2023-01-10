@@ -1,13 +1,17 @@
 package com.example.databasetest
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
 import android.widget.LinearLayout
 import android.widget.ListView
-import com.example.databasetest.customclass.*
 import com.example.databasetest.databinding.ActivityMainBinding
+import com.example.databasetest.customclass.*
 
 class MainActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
     private lateinit var binding: ActivityMainBinding
@@ -20,8 +24,24 @@ class MainActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
 
         // デフォルトのアクションバーを非表示にする
         supportActionBar?.hide()
-
         setCustomToolBar()
+
+        binding.listLayout.visibility = View.INVISIBLE
+
+        binding.animationView.addAnimatorListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator?) {
+                val putAnim = AlphaAnimation(1.0f, 0.0f)
+                putAnim.duration = 500
+                putAnim.fillAfter = true
+                binding.animationView.animation = putAnim
+                binding.animationView.visibility = View.GONE
+                val inAnim = AlphaAnimation(0.0f, 1.0f)
+                inAnim.duration = 2000
+                inAnim.fillAfter = true
+                binding.listLayout.animation = inAnim
+                binding.listLayout.visibility = View.VISIBLE
+            }
+        })
 
         binding.listView.setOnItemClickListener{ _, _, position, _ ->
             val intent = Intent(this, EditActivity::class.java)
@@ -31,18 +51,27 @@ class MainActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
         }
     }
 
+
+
     override fun onResume() {
         super.onResume()
         DBHelper(this)
         setListViewAdapter(binding.listView)
+        if(binding.listView.count != 0) {
+            binding.upAnimation.visibility = View.INVISIBLE
+            binding.dataAnimation.visibility = View.INVISIBLE
+        } else {
+            binding.upAnimation.visibility = View.VISIBLE
+            binding.dataAnimation.visibility = View.VISIBLE
+        }
     }
 
     private fun setCustomToolBar() {
         val toolBarCustomView = ToolBarCustomView(this)
         toolBarCustomView.delegate = this
 
-        val title = "アプリ"
-        toolBarCustomView.configure(title, true, true, R.drawable.ic_baseline_add_24)
+        val title = "Speak Record"
+        toolBarCustomView.configure(title, true, null, R.drawable.ic_baseline_add_24)
 
         // カスタムツールバーを挿入するコンテナ(入れ物)を指定
         val layout: LinearLayout = binding.containerForToolbar

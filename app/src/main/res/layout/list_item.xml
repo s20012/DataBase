@@ -8,14 +8,17 @@
     <TextView
         android:id="@+id/text_title"
         android:layout_width="229dp"
-        android:layout_height="wrap_content"
-        android:text="title"
+        android:layout_height="70dp"
+        android:layout_gravity="clip_vertical|start"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:text="タイトルなし"
         android:textSize="24sp" />
 
     <TextView
         android:id="@+id/day_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp" />
+        android:textSize="16sp" />
 
 </LinearLayout>

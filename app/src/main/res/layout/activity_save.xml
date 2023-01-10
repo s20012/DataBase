@@ -41,6 +41,7 @@
             android:layout_marginEnd="16dp"
             android:autofillHints=""
             android:ems="10"
+            android:hint="タイトルなし"
             android:inputType="textPersonName"
             android:textSize="25sp"
             tools:ignore="SpeakableTextPresentCheck" />
@@ -62,6 +63,7 @@
             android:layout_marginEnd="16dp"
             android:ems="10"
             android:gravity="start|top"
+            android:hint="音声入力ボタンを押してください"
             android:inputType="textMultiLine"
             tools:ignore="SpeakableTextPresentCheck" />
 
